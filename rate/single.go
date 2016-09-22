@@ -90,14 +90,12 @@ func (s *Single) get(in chan<- Rate, t time.Time) {
 		s.getTime = t
 	}
 
-	msg := " rate"
-	if isCopy {
-		msg = "Copy" + msg
-	} else {
-		msg = "New" + msg
-	}
 	if getErr == nil {
-		log.WithField("value", value).Debug(msg)
+		if isCopy {
+			log.WithField("value", value).Warning("Copy rate")
+		} else {
+			log.WithField("value", value).Debug("New rate")
+		}
 	}
 
 	in <- Rate{t.Unix() * 1000, value, getErr}
