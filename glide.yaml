@@ -1,0 +1,4 @@
+package: github.com/shumkovdenis/currency-server
+import:
+- package: github.com/Sirupsen/logrus
+  version: v0.10.0
